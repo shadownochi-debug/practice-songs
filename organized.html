@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="道歌與祈請文修持">
+<title>道歌與祈請文修持｜目錄</title>
+<style>
+:root{--bg:#f4efe6;--paper:#fffdf8;--ink:#302a24;--muted:#81766a;--line:#ddd2c3;--accent:#6e5842}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Serif TC","PingFang TC","Microsoft JhengHei",serif}
+.app{max-width:720px;margin:auto;padding:18px 14px 40px}header{text-align:center;padding:10px 8px 14px}h1{font-size:23px;margin:0;letter-spacing:.08em}.sub{font-size:12px;color:var(--muted);margin-top:6px}
+.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);font-size:16px;outline:none;margin:4px 0 10px}
+.filters{display:flex;gap:7px;overflow:auto;padding-bottom:8px}.filter{white-space:nowrap;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 11px;font-size:12px;color:var(--accent)}.filter.active{background:var(--accent);color:#fff}
+.summary{font-size:12px;color:var(--muted);margin:3px 2px 12px}.section{margin:16px 0 6px;font-size:14px;font-weight:700;color:var(--accent);padding-bottom:6px;border-bottom:1px solid var(--line)}
+.song{width:100%;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:13px;padding:13px 14px;margin:0 0 8px;color:var(--ink);cursor:pointer}.name{font-size:16px;line-height:1.45}.meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.badge{font-size:11px;padding:3px 7px;border-radius:999px;background:#eee7dc;color:var(--muted)}.yes{background:#e1e7dc;color:#526044}.no{background:#eee7dc;color:#8b7968}.empty{text-align:center;color:var(--muted);padding:35px}
+.detail{display:none}.back{border:0;background:transparent;color:var(--accent);padding:5px 0 12px;font-size:14px}.title{font-size:22px;line-height:1.5;margin:0}.page{font-size:12px;color:var(--muted);margin:4px 0 12px}.audio{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:12px;margin-bottom:12px}.audio small{color:var(--muted);display:block;margin-bottom:7px}audio{width:100%}.lyrics{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:20px 17px}.line{font-size:17px;line-height:1.9;margin:0 0 8px;white-space:pre-wrap;overflow-wrap:anywhere}.note{font-size:12px;line-height:1.7;color:var(--muted);margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
+</style></head><body><div class="app"><header><h1>道歌與祈請文修持</h1><div class="sub">依 2026 尼泊爾共修法本順序整理</div></header>
+<div id="list"><input id="q" class="search" placeholder="搜尋歌名、祈請文……"><div id="filters" class="filters"></div><div id="summary" class="summary"></div><div id="songs"></div></div>
+<div id="detail" class="detail"><button class="back" onclick="showList()">← 回歌曲列表</button><h2 id="dt" class="title"></h2><div id="dp" class="page"></div><div id="da"></div><div id="dl" class="lyrics"></div></div></div>
+<script>
+const OLD='index.html';
+const AUDIO_BASE='https://raw.githubusercontent.com/shadownochi-debug/practice-songs/main/';
+const PDF_ORDER=[{"cn":"梵文三皈依","p":1,"sec":"一、共修基礎儀軌"},{"cn":"皈依發心","p":1,"sec":"一、共修基礎儀軌"},{"cn":"發菩提心願文","p":2,"sec":"一、共修基礎儀軌"},{"cn":"四無量心","p":2,"sec":"一、共修基礎儀軌"},{"cn":"大手印傳承祈請文","p":3,"sec":"一、共修基礎儀軌"},{"cn":"七支供養祈請文","p":4,"sec":"一、共修基礎儀軌"},{"cn":"獻曼達","p":5,"sec":"一、共修基礎儀軌"},{"cn":"請轉法輪","p":5,"sec":"一、共修基礎儀軌"},{"cn":"度母頌","p":6,"sec":"二、度母修持"},{"cn":"白度母祈請文","p":6,"sec":"二、度母修持"},{"cn":"度母本尊修持","p":7,"sec":"二、度母修持"},{"cn":"聖救度佛母二十一種禮讚經","p":8,"sec":"二、度母修持"},{"cn":"德謙讓卓上師相應法","p":11,"sec":"三、上師相應與蓮師"},{"cn":"金剛持堪千竹清嘉措仁波切上師相應法","p":12,"sec":"三、上師相應與蓮師"},{"cn":"蓮師妄念自解脫祈請文","p":15,"sec":"三、上師相應與蓮師"},{"cn":"蓮師上師相應法 薈供與酬懺","p":17,"sec":"三、上師相應與蓮師"},{"cn":"迎請——蓮師七句祈請文","p":18,"sec":"三、上師相應與蓮師"},{"cn":"蓮師精要祈請文","p":19,"sec":"三、上師相應與蓮師"},{"cn":"蓮師祈請文","p":22,"sec":"三、上師相應與蓮師"},{"cn":"普賢雲海供","p":24,"sec":"四、護法與供養"},{"cn":"新伏藏護法神短誦","p":24,"sec":"四、護法與供養"},{"cn":"智慧護法朵馬供食日課","p":25,"sec":"四、護法與供養"},{"cn":"羅剎嘎拉——顱鬘者祈請文","p":27,"sec":"四、護法與供養"},{"cn":"摩訶摩羅祈請供養文","p":30,"sec":"四、護法與供養"},{"cn":"第十七世法王噶瑪巴長久住世祈請文","p":31,"sec":"五、祈請文"},{"cn":"勸請至要誓願","p":32,"sec":"五、祈請文"},{"cn":"加持雨降任顯豁然曲","p":33,"sec":"五、祈請文"},{"cn":"天笛之哀呼","p":34,"sec":"五、祈請文"},{"cn":"殷切虔敬曲——大恩上師祈請文","p":36,"sec":"五、祈請文"},{"cn":"竹慶本樂仁波切長久住世祈請文","p":38,"sec":"五、祈請文"},{"cn":"竹慶本樂仁波切佛行事業昌盛祈請文","p":38,"sec":"五、祈請文"},{"cn":"阿拉桑噶仁波切長久住世祈請文","p":39,"sec":"五、祈請文"},{"cn":"諦雅竹奔仁波切長久住世祈請文","p":40,"sec":"五、祈請文"},{"cn":"傳承上師長久住世祈請文","p":40,"sec":"五、祈請文"},{"cn":"菩提心祈願文","p":41,"sec":"六、祈願與迴向"},{"cn":"菩提心願偈","p":41,"sec":"六、祈願與迴向"},{"cn":"吉祥頌","p":42,"sec":"六、祈願與迴向"},{"cn":"龍樹菩薩迴向文","p":42,"sec":"六、祈願與迴向"},{"cn":"密勒日巴迴向文","p":42,"sec":"六、祈願與迴向"},{"cn":"堪布仁波切迴向文","p":43,"sec":"六、祈願與迴向"},{"cn":"那爛陀菩提祈願文","p":43,"sec":"六、祈願與迴向"},{"cn":"世界啊！","p":44,"sec":"六、祈願與迴向"},{"cn":"法身城","p":46,"sec":"七、道歌"},{"cn":"吉祥光照全宇宙","p":47,"sec":"七、道歌"},{"cn":"八無拒","p":49,"sec":"七、道歌"},{"cn":"瑜伽十八樂","p":51,"sec":"七、道歌"},{"cn":"大手印、大圓滿、大中觀要義","p":53,"sec":"七、道歌"},{"cn":"五毒自解脫","p":54,"sec":"七、道歌"},{"cn":"朋友","p":56,"sec":"七、道歌"},{"cn":"法王松贊甘布勝住開光吉祥文","p":57,"sec":"七、道歌"},{"cn":"點燈祈願文","p":63,"sec":"七、道歌"},{"cn":"愛的心要口訣","p":64,"sec":"七、道歌"},{"cn":"決心歌","p":68,"sec":"七、道歌"},{"cn":"圓滿次第","p":69,"sec":"七、道歌"},{"cn":"一切顯相","p":70,"sec":"七、道歌"},{"cn":"天龍甚深吼","p":71,"sec":"七、道歌"},{"cn":"平等性之歌","p":73,"sec":"七、道歌"},{"cn":"恆樂之歌","p":74,"sec":"七、道歌"},{"cn":"大手印之歌","p":76,"sec":"七、道歌"},{"cn":"對勝義的三種確信","p":77,"sec":"七、道歌"},{"cn":"生起次第","p":78,"sec":"七、道歌"},{"cn":"樂空不二金剛舞","p":79,"sec":"七、道歌"},{"cn":"如幻三摩地詩偈","p":81,"sec":"七、道歌"},{"cn":"萬物本貌","p":83,"sec":"七、道歌"}];
+const AUDIO_OVERRIDE={"大手印傳承祈請文":["4_大手印傳承祈請文(後段重複旋律).m4a"],"白度母祈請文":["白度母祈請文.m4a"],"德謙讓卓上師相應法":["24_德謙讓卓上師相應法.m4a"],"金剛持堪千竹清嘉措仁波切上師相應法":["金剛持堪千竹清嘉措仁波切 上師相應法.m4a"],"迎請——蓮師七句祈請文":["26_蓮師七句祈請文（華老師 馬爾巴調）.m4a","27_蓮師七句祈請文接續蓮師心咒.m4a"],"第十七世法王噶瑪巴長久住世祈請文":["第十七世大寶法王鄔金欽列多傑長壽祈請文.mp4"],"勸請至要誓願":["30_勸請至要誓願 堪千竹清嘉措仁波切迅速轉世祈請文.mp3"],"加持雨降任顯豁然曲":["加持雨降任顯豁然曲上師祈請文.m4a"],"天笛之哀呼":["天笛之哀呼 萬賢哲之頂嚴堪千竹清喜措仁波切祈請文.m4a"],"殷切虔敬曲——大恩上師祈請文":["殷切虔敬曲 大恩上師祈請文.m4a"],"諦雅竹奔仁波切長久住世祈請文":["諦雅竹奔仁波切祈請文.aac"],"世界啊！":["世界啊(剪).mp3"],"吉祥光照全宇宙":["吉祥光照全宇宙.mp3"],"對勝義的三種確信":["23_對勝義的三種確信.mp3"],"萬物本貌":["22_萬物本貌.m4a"]};
+let all=[],mode='all';
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function audioFiles(a){return Array.isArray(a)?a:(a?[a]:[])}
+function sectionName(s){return s||'其他'}
+async function load(){
+ try{
+  const t=await fetch(OLD+'?v='+Date.now()).then(r=>r.text());
+  const m=t.match(/const songs=(\[[\s\S]*?\]);\s*(?:const|function|let|var)/);
+  if(!m) throw new Error('songs not found');
+  const oldSongs=JSON.parse(m[1]).map((x,i)=>({...x,_i:i}));
+  const byName=new Map(oldSongs.map(x=>[x.cn,x]));
+  all=PDF_ORDER.map((meta,i)=>{const x=byName.get(meta.cn)||{cn:meta.cn,en:'',l:[],n:[]};return {...x,...meta,a:AUDIO_OVERRIDE[meta.cn]||audioFiles(x.a),_i:i};});
+  buildFilters(); render();
+ }catch(e){document.getElementById('songs').innerHTML='<div class="empty">目前無法讀取歌曲資料，請重新整理。</div>';console.error(e)}
+}
+function buildFilters(){const fs=[['all','全部'],['audio','🎧 有音檔'],['missing','○ 待補音檔']];document.getElementById('filters').innerHTML=fs.map(([v,n])=>`<button class="filter ${mode===v?'active':''}" onclick="setMode('${v}')">${n}</button>`).join('')}
+function setMode(v){mode=v;buildFilters();render()}
+function render(){
+ const q=document.getElementById('q').value.trim().toLowerCase();
+ const filtered=all.filter(x=>{const has=audioFiles(x.a).length>0;const ok=mode==='all'||(mode==='audio'&&has)||(mode==='missing'&&!has);return ok&&(!q||`${x.cn||''} ${x.en||''}`.toLowerCase().includes(q))});
+ const hasCount=all.filter(x=>audioFiles(x.a).length).length;document.getElementById('summary').textContent=`共 ${all.length} 項｜已有音檔 ${hasCount} 項｜待補音檔 ${all.length-hasCount} 項`;
+ let last='';document.getElementById('songs').innerHTML=filtered.map(x=>{const sec=sectionName(x.sec);const h=sec!==last?`<div class="section">${esc(sec)}</div>`:'';last=sec;const af=audioFiles(x.a);return h+`<button class="song" onclick="openSong(${all.indexOf(x)})"><div class="name">${esc(x.cn)}</div><div class="meta"><span class="badge">法本 p.${esc(x.p)}</span>${af.length?`<span class="badge yes">🎧 已有音檔</span>`:`<span class="badge no">○ 待補音檔</span>`}</div></button>`}).join('')||'<div class="empty">找不到符合的歌曲</div>';
+}
+document.getElementById('q').addEventListener('input',render);
+function openSong(i){const x=all[i],af=audioFiles(x.a);document.getElementById('list').style.display='none';document.getElementById('detail').style.display='block';document.getElementById('dt').textContent=x.cn||'';document.getElementById('dp').textContent=`法本第 ${x.p} 頁`;document.getElementById('da').innerHTML=af.length?`<div class="audio"><small>🎧 已有音檔（${af.length} 個）</small>${af.map(f=>`<div style="margin:0 0 10px"><div style="font-size:12px;color:var(--muted);margin-bottom:5px">${esc(f)}</div><audio controls preload="none" src="${AUDIO_BASE+encodeURIComponent(f)}"></audio></div>`).join('')}</div>`:`<div class="audio"><small>○ 尚未加入音檔</small><div style="font-size:12px;color:var(--muted)">找到音檔後，把檔案放到 GitHub，再告訴我，我可以幫你接上。</div></div>`;const lines=Array.isArray(x.l)?x.l:[];const notes=Array.isArray(x.n)?x.n:[];document.getElementById('dl').innerHTML=lines.map(s=>`<p class="line">${esc(s)}</p>`).join('')+(notes.length?`<div class="note">${notes.map(s=>esc(s)).join('<br>')}</div>`:'');window.scrollTo(0,0)}
+function showList(){document.getElementById('detail').style.display='none';document.getElementById('list').style.display='block';window.scrollTo(0,0)}
+load();
+</script></body></html>
