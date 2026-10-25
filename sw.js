@@ -1,7 +1,7 @@
-const CACHE='nepal-boarding-v4';
+const CACHE='nepal-boarding-v5';
 const SHELL=['./boarding-practice.html'];
 const AUDIO=[
- '6_天笛之哀呼 萬賢哲之頂嚴堪千竹清嘉措仁波切祈請文.m4a',
+ '7_天龍甚深吼_5mb-compressed-2.mp3',
  '23_對勝義的三種確信.mp3',
  '9_加持雨降任顯豁然曲上師祈請文.m4a',
  '18_殷切虔敬曲 大恩上師祈請文.m4a',
