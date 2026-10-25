@@ -2,11 +2,11 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="登機練歌"><meta name="theme-color" content="#f5f0e7">
-<title>尼泊爾登機練歌｜4 首</title>
+<title>尼泊爾登機練歌｜5 首</title>
 <style>
 :root{--bg:#f5f0e7;--card:#fffdf8;--ink:#2f2b27;--muted:#756e66;--line:#ded5c8;--accent:#7b5b3a;--ok:#39734a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.65}main{max-width:760px;margin:auto;padding:24px 16px 48px}.hero{padding:10px 4px 18px}.hero h1{font-size:27px;margin:0 0 5px}.hero p{margin:0;color:var(--muted)}.status{background:#efe6d8;border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin:12px 0 18px}.status strong{display:block;margin-bottom:4px}.status small{color:var(--muted)}button{border:0;border-radius:12px;padding:11px 14px;background:var(--accent);color:white;font-size:15px;margin-top:10px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:14px 0;overflow:hidden}.head{padding:17px 17px 12px}.en{font-size:21px;font-weight:700}.zh{font-size:18px;font-weight:600;margin-top:2px}.meta{font-size:14px;color:var(--muted);margin-top:5px}.lyrics{padding:14px 17px 17px;white-space:pre-wrap;font-size:17px;border-top:1px solid var(--line)}.tag{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 8px;margin-left:5px;color:var(--ok);background:#f1f7f1}.audio{width:100%;margin-top:10px}.note{font-size:13px;color:var(--muted);padding:0 17px 17px}.footer{font-size:13px;color:var(--muted);margin-top:24px}
 </style></head><body><main>
-<section class="hero"><h1>🇳🇵 尼泊爾登機練歌</h1><p>只放這次最需要熟悉的 4 首｜完整歌詞＋音檔</p></section>
+<section class="hero"><h1>🇳🇵 尼泊爾登機練歌</h1><p>只放這次最需要熟悉的 5 首｜完整歌詞＋音檔</p></section>
 <div class="status" id="status"><strong>離線使用準備</strong><small>第一次請在有網路時開啟，按下方按鈕後可開飛航模式測試。</small><br><button id="prepare">立即準備離線版</button></div>
 <div id="songs"></div><div class="footer">歌詞依你提供的中心法本整理，保留原頁的註記符號。出發前請務必開啟飛航模式重新測一次。</div>
 </main><script>
@@ -36,8 +36,10 @@ const songs=[
 {en:'Three Kinds of Confidence in Genuine Reality',zh:'對勝義的三種確信',page:'77',file:'23_對勝義的三種確信.mp3',lyrics:`敬禮譯師馬爾巴　　我於他鄉修行時
 於無生法得定解　　今生來生二執淨
 六道顯相成虛妄　　生死二者增益斷
+
 於平等性得定解　　苦樂二執得清淨
 感受體驗成虛妄　　取捨二者增益斷
+
 於無分別¹得定解　　輪涅二執皆清淨
 道地修習成虛妄　　希懼二者增益斷²`,note:'¹ 三種確信是指：無生、平等、無二；此處「無分別」即是「無二」。\n² 這裡的「增益」不是密乘四法「息增懷誅」的增益事業，而是「再增加」的意思，歌中「增益斷」意思是「還需要再增加什麼的執念也已斷除了」。'},
 {en:'Bringing Down The Rain of Blessings',zh:'加持雨降任顯豁然曲——上師祈請文',page:'33',file:'9_加持雨降任顯豁然曲上師祈請文.m4a',lyrics:`南無咕嚕
@@ -67,10 +69,20 @@ const songs=[
 我此自心一如上師般　祈賜加持當下即了悟
 
 從來無聚無散虔敬中　自心若能無疑作祈請
-大愛悲心不倦恆看護　賜與師心無別之悉地`}
+大愛悲心不倦恆看護　賜與師心無別之悉地
+
+首先殷切祈請外上師　其次與內上師心合一
+最終一味無別本解脫　利樂無盡有情大願成`},
+{en:'Supplication to White Tara',zh:'白度母祈請文',page:'6',file:'11_白度母祈請文.m4a',lyrics:`眾生皆為執實念所苦　祈爾無我智眼視眾生
+三界輪迴之苦除滅者　度母如意輪寶除死懼
+祈賜無上共通之悉地
+
+嗡達咧 嘟達咧 嘟咧 梭哈
+嗡達咧 嘟達咧 嘟咧 瑪瑪 阿優 布涅
+嘉納 布真咕嚕 梭哈`,note:'法本 p.6；此段依你提供的中心法本逐字放入。音檔檔名依你之前上傳的檔名設定；若 GitHub 尚未出現該檔案，請再上傳一次。'}
 ];
 function esc(s){return s.replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\\':'&#92;'}[m]))}
 const box=document.getElementById('songs');songs.forEach((s,i)=>{const d=document.createElement('article');d.className='card';d.innerHTML=`<div class="head"><div class="en">${esc(s.en)}</div><div class="zh">${esc(s.zh)}</div><div class="meta">法本 p.${s.page}<span class="tag" id="tag${i}">音檔</span></div><audio class="audio" controls preload="metadata" src="${base+encodeURIComponent(s.file)}"></audio></div><div class="lyrics">${esc(s.lyrics)}</div>${s.note?`<div class="note">${esc(s.note)}</div>`:''}`;box.appendChild(d)});
-async function prepare(){const status=document.getElementById('status'),btn=document.getElementById('prepare');btn.disabled=true;status.querySelector('strong').textContent='正在準備 4 首音檔…';try{const c=await caches.open('nepal-boarding-v2');for(let i=0;i<songs.length;i++){await c.add(base+encodeURIComponent(songs[i].file));document.getElementById('tag'+i).textContent='✓ 已準備離線'}status.querySelector('strong').textContent='✓ 離線音檔準備完成';status.querySelector('small').textContent='現在可開飛航模式測試。';}catch(e){status.querySelector('strong').textContent='⚠️ 離線準備未完成';status.querySelector('small').textContent='請保持網路後再試一次。'}finally{btn.disabled=false}}
+async function prepare(){const status=document.getElementById('status'),btn=document.getElementById('prepare');btn.disabled=true;status.querySelector('strong').textContent='正在準備 5 首音檔…';try{const c=await caches.open('nepal-boarding-v3');for(let i=0;i<songs.length;i++){await c.add(base+encodeURIComponent(songs[i].file));document.getElementById('tag'+i).textContent='✓ 已準備離線'}status.querySelector('strong').textContent='✓ 離線音檔準備完成';status.querySelector('small').textContent='現在可開飛航模式測試。'}catch(e){status.querySelector('strong').textContent='⚠️ 離線準備未完成';status.querySelector('small').textContent='白度母音檔若未上傳至 GitHub，請先上傳後再按一次。'}finally{btn.disabled=false}}
 document.getElementById('prepare').onclick=prepare;
 </script></body></html>
