@@ -1,21 +1,18 @@
 (function(){
-  function bind(){
-    if(typeof window.openSong !== 'function') return;
-    document.querySelectorAll('.song').forEach(function(btn){
-      if(btn.dataset.clickFixed) return;
-      var cnEl=btn.querySelector('.cn');
-      var enEl=btn.querySelector('.en');
-      var meta=btn.querySelector('.meta');
-      if(!cnEl||!enEl) return;
-      var cn=cnEl.textContent.trim();
-      var en=enEl.textContent.trim();
-      var pg='—';
-      if(meta){var m=meta.textContent.match(/p\.([^\s]+)/); if(m) pg=m[1];}
-      btn.dataset.clickFixed='1';
-      btn.removeAttribute('onclick');
-      btn.addEventListener('click',function(e){e.preventDefault();window.openSong(cn,en,pg);});
-    });
+  function handle(e){
+    var el=e.target;
+    while(el && el!==document && !el.classList.contains('song')) el=el.parentElement;
+    if(!el || !el.classList.contains('song')) return;
+    var cnEl=el.querySelector('.cn'), enEl=el.querySelector('.en'), meta=el.querySelector('.meta');
+    if(!cnEl || !enEl || typeof window.openSong!=='function') return;
+    var cn=cnEl.textContent.trim();
+    var en=enEl.textContent.trim();
+    var pg='—';
+    if(meta){var m=meta.textContent.match(/p\.([^\s]+)/);if(m)pg=m[1];}
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    window.openSong(cn,en,pg);
   }
-  bind();
-  new MutationObserver(bind).observe(document.body,{childList:true,subtree:true});
+  document.addEventListener('click',handle,true);
+  document.addEventListener('touchend',handle,true);
 })();
