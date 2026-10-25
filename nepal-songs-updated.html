@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="尼泊爾共修歌曲">
+<meta name="theme-color" content="#f4efe6"><title>尼泊爾共修歌曲</title>
+<style>
+:root{--bg:#f4efe6;--paper:#fffdf8;--ink:#302a24;--muted:#81766a;--line:#ddd2c3;--accent:#6e5842}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Serif TC","PingFang TC","Microsoft JhengHei",serif}.app{max-width:700px;min-height:100vh;margin:auto;padding:env(safe-area-inset-top) 14px 34px}header{text-align:center;padding:24px 10px 15px}h1{margin:0;font-size:24px;letter-spacing:.08em}.sub{margin-top:6px;color:var(--muted);font-size:13px;line-height:1.6}.search{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:13px;background:var(--paper);outline:none;margin:4px 0 10px}.filters{display:flex;gap:7px;overflow:auto;padding:2px 0 10px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filter{white-space:nowrap;border:1px solid var(--line);background:var(--paper);color:var(--accent);border-radius:999px;padding:8px 11px;font-size:13px}.filter.active{background:var(--accent);color:#fff}.note{font-size:12px;color:var(--muted);line-height:1.7;margin:3px 2px 14px}.song{display:block;width:100%;text-align:left;padding:14px 15px;margin:0 0 9px;background:var(--paper);border:1px solid var(--line);border-radius:14px;color:var(--ink);cursor:pointer}.song strong{display:block;font-size:16px;line-height:1.45}.song .en{display:block;font-size:13px;color:var(--muted);margin-top:4px;line-height:1.45}.meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.badge{font-size:11px;padding:3px 7px;border-radius:999px;background:#eee7dc;color:var(--muted)}.badge.audio{background:#e4ded4;color:var(--accent)}.badge.recite{background:#e7e0d6;color:var(--accent)}.back{border:0;background:transparent;color:var(--accent);padding:7px 0 12px;font-size:14px;cursor:pointer}.title{font-size:22px;line-height:1.45;margin:0}.subtitle{font-size:13px;color:var(--muted);line-height:1.6;margin:4px 0 13px}.audio{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px}.audio-label{font-size:12px;color:var(--muted);margin-bottom:7px}audio{width:100%;height:40px}.lyrics{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px 18px}.line{font-size:18px;line-height:1.9;margin:0 0 8px;overflow-wrap:anywhere}.empty{text-align:center;color:var(--muted);padding:35px 10px}@media(max-width:420px){.line{font-size:17px}h1{font-size:22px}}
+</style></head>
+<body><div class="app"><header><h1>🇳🇵 尼泊爾共修歌曲</h1><div class="sub">2026/10/28–10/30｜諦雅寺<br>英文 → 中文｜法本頁碼｜音檔狀態</div></header><main id="main"></main></div>
+<script>
+const audioOverrides={
+ '八無拒':'1_八無拒-compressed.mp3',
+ '大手印、大圓滿、大中觀要義':'2_大手印、大圓滿、大中觀要義-compressed.mp3',
+ '天龍甚深吼':'7_天龍甚深吼_5mb-compressed-2.mp3'
+};
+const reciteOnly=new Set(['菩提心祈願文']);
+let songs=[],query='',filter='全部',current=-1;
+const main=document.getElementById('main');
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function status(s){if(reciteOnly.has(s.cn))return ['🗣️ 唸誦｜無需音檔','recite'];if(s.a)return ['🎧 已有音檔','audio'];return ['○ 待補音檔','need']}
+function ok(s){const q=query.trim().toLowerCase();if(q&&!(`${s.cn} ${s.en}`.toLowerCase().includes(q)))return false;const c=status(s)[1];if(filter==='有音檔'&&c!=='audio')return false;if(filter==='待補音檔'&&c!=='need')return false;if(filter==='唸誦'&&c!=='recite')return false;return true}
+function render(){
+ if(current>=0){const s=songs[current];const [label,cls]=status(s);main.innerHTML=`<button class="back" onclick="current=-1;render()">← 返回歌曲列表</button><h2 class="title">${esc(s.cn)}</h2><div class="subtitle">${esc(s.en)}<br>法本 p.${s.p}</div>${s.a?`<div class="audio"><div class="audio-label">${label}</div><audio controls preload="none" src="${encodeURI(s.a)}"></audio></div>`:`<div class="audio"><div class="audio-label">${label}</div></div>`}<div class="lyrics">${(s.l||[]).map(x=>`<p class="line">${esc(x)}</p>`).join('')}</div>`;return}
+ const list=songs.filter(ok);const n=songs.reduce((x,s)=>{x[status(s)[1]]++;return x},{audio:0,need:0,recite:0});
+ main.innerHTML=`<input class="search" placeholder="搜尋中文或英文歌名" value="${esc(query)}" oninput="query=this.value;render()"><div class="filters">${['全部','有音檔','待補音檔','唸誦'].map(f=>`<button class="filter ${filter===f?'active':''}" onclick="filter='${f}';render()">${f}</button>`).join('')}</div><div class="note">目前共 ${songs.length} 項｜🎧 ${n.audio} 首已有音檔｜○ ${n.need} 首待補｜🗣️ ${n.recite} 項唸誦無需音檔。<br>新增音檔已接上：八無拒、大手印／大圓滿／大中觀要義、天龍甚深吼。</div>${list.map(s=>{const [label,cls]=status(s);const i=songs.indexOf(s);return `<button class="song" onclick="current=${i};render()"><strong>${esc(s.en)}</strong><span class="en">${esc(s.cn)}　·　p.${s.p}</span><div class="meta"><span class="badge ${cls}">${label}</span></div></button>`}).join('')||'<div class="empty">找不到歌曲</div>'}`;
+}
+async function load(){
+ try{
+  const text=await fetch('./nepal-songs.html').then(r=>r.text());
+  const m=text.match(/const songs=(\[[\s\S]*?\]);\s*(?:const|let|function)\b/);
+  if(!m)throw new Error('找不到原始歌曲資料');
+  songs=JSON.parse(m[1]).map(s=>({...s,a:audioOverrides[s.cn]||s.a}));
+  songs.sort((a,b)=>(a.p||999)-(b.p||999));
+  render();
+ }catch(e){main.innerHTML='<div class="empty">無法載入歌曲資料，請重新整理頁面。</div>';console.error(e)}
+}
+load();
+</script></body></html>
