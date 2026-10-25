@@ -1,8 +1,23 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="refresh" content="0;url=nepal-app.html"><title>尼泊爾三日共修</title>
-<script>location.replace('./nepal-app.html');</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="尼泊爾三日共修">
+<title>尼泊爾三日共修</title>
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f5f0e7}iframe{display:block;width:100%;height:100%;border:0}</style>
 </head>
-<body><p>正在開啟尼泊爾三日共修…</p><p><a href="./nepal-app.html">如果沒有自動開啟，請點這裡</a></p></body></html>
+<body>
+<iframe id="app" src="./nepal-app.html" title="尼泊爾三日共修"></iframe>
+<script>
+const frame=document.getElementById('app');
+frame.addEventListener('load',()=>{
+  const doc=frame.contentDocument;
+  const s=doc.createElement('script');
+  s.src='./lyrics-fix.js?v=2';
+  doc.body.appendChild(s);
+});
+</script>
+</body>
+</html>
