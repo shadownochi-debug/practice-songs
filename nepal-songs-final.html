@@ -1,40 +1,54 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><title>🇳🇵 尼泊爾共修歌曲</title><style>body{margin:0;background:#f5f0e7;color:#332c25;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Serif TC",sans-serif}.app{max-width:700px;margin:auto;padding:22px 14px 40px}h1{text-align:center;font-size:24px;margin:0 0 4px}.sub{text-align:center;color:#81766a;font-size:12px;line-height:1.7;margin-bottom:16px}.search{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #d9cdbd;border-radius:12px;background:#fffdf8;font-size:16px;margin-bottom:10px}.filters{display:flex;gap:7px;overflow:auto;margin-bottom:12px}.filter{white-space:nowrap;border:1px solid #d9cdbd;border-radius:20px;background:#fffdf8;padding:8px 12px;color:#6e5842}.filter.active{background:#6e5842;color:white}.song{display:block;width:100%;box-sizing:border-box;text-align:left;border:1px solid #ddd2c3;border-radius:13px;background:#fffdf8;padding:14px;margin:0 0 9px;color:#332c25}.song .en{font-size:15px;font-weight:600;line-height:1.45}.song .cn{font-size:14px;color:#756b61;margin-top:3px}.meta{font-size:11px;color:#81766a;margin-top:7px}.audio{margin-top:9px;width:100%;height:38px}.empty{text-align:center;color:#81766a;padding:30px}.play{font-size:12px;color:#496b52;margin-top:7px}</style></head><body><div class="app"><h1>🇳🇵 尼泊爾共修歌曲</h1><div class="sub">2026/10/28–10/30｜諦雅寺<br>依尼泊爾共修資料整理｜英文 → 中文｜法本頁碼</div><input id="q" class="search" placeholder="搜尋中文或英文歌名"><div id="filters" class="filters"></div><div id="count" class="sub"></div><div id="list"></div></div><script>
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="尼泊爾共修歌曲"><title>🇳🇵 尼泊爾三日共修歌曲</title>
+<style>
+:root{--bg:#f5f0e7;--paper:#fffdf8;--ink:#332c25;--muted:#81766a;--line:#d9cdbd;--accent:#6e5842;--ok:#496b52}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Serif TC",sans-serif}.app{max-width:700px;margin:auto;padding:22px 14px 44px}h1{text-align:center;font-size:24px;margin:0 0 4px}.sub{text-align:center;color:var(--muted);font-size:12px;line-height:1.7;margin-bottom:14px}.search{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);font-size:16px;margin-bottom:10px;outline:none}.days{display:flex;gap:7px;margin-bottom:10px}.day{flex:1;border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:10px 6px;color:var(--accent);font-weight:600}.day.active{background:var(--accent);color:#fff}.sessions{display:flex;gap:7px;overflow:auto;padding-bottom:10px}.session{white-space:nowrap;border:1px solid var(--line);border-radius:20px;background:var(--paper);padding:8px 12px;color:var(--accent)}.session.active{background:#8a7259;color:#fff}.searchMode{margin:2px 0 12px;font-size:12px;color:var(--muted)}.sectionTitle{font-size:18px;font-weight:700;margin:12px 2px 4px}.sectionSub{font-size:12px;color:var(--muted);margin:0 2px 12px;line-height:1.6}.song{width:100%;text-align:left;border:1px solid var(--line);border-radius:13px;background:var(--paper);padding:14px;margin:0 0 9px;color:var(--ink)}.en{font-size:15px;font-weight:600;line-height:1.45}.cn{font-size:14px;color:#756b61;margin-top:3px;line-height:1.5}.meta{font-size:11px;color:var(--muted);margin-top:7px}.badge{display:inline-block;font-size:11px;border-radius:10px;padding:3px 7px;background:#eee7dc;margin-top:7px}.audioBadge{background:#e5eee6;color:var(--ok)}audio{display:block;width:100%;height:38px;margin-top:9px}.empty{text-align:center;color:var(--muted);padding:32px 10px}.back{border:0;background:none;color:var(--accent);font-size:14px;padding:6px 0 12px}.allBtn{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:11px;color:var(--accent);margin-top:8px}.hint{font-size:12px;color:var(--muted);line-height:1.7;margin:12px 2px}.hidden{display:none}@media(max-width:430px){h1{font-size:22px}.day{font-size:13px}}
+</style></head><body><div class="app"><h1>🇳🇵 尼泊爾三日共修歌曲</h1><div class="sub">2026/10/28–10/30｜諦雅寺<br>依三日維那對照表整理｜英文 → 中文｜法本頁碼</div><input id="q" class="search" placeholder="🔎 搜尋中文或英文歌名"><div id="days" class="days"></div><div id="sessions" class="sessions"></div><div id="mode" class="searchMode"></div><div id="list"></div></div>
+<script>
 const A='./';
-const songs=[
-['Mahamudra Lineage Supplication','大手印傳承祈請文',3,'4_大手印傳承祈請文(後段重複旋律).m4a'],
-['The Song of Mahamudra','大手印之歌',76,'3_大手印之歌.m4a'],
-['The Essential Points of Mahamudra, Dzogchen, and the Middle Way','大手印、大圓滿、大中觀要義',53,'2_大手印、大圓滿、大中觀要義-compressed.mp3'],
-['Five Poisons Self-Liberated','五毒自解脫',54,'5_五毒自解脫.mp3'],
-['The Deva’s Flute','天笛之哀呼——十萬賢哲之頂嚴堪千竹清嘉措仁波切祈請文',34,'天笛之哀呼 萬賢哲之頂嚴堪千竹清喜措仁波切祈請文.m4a'],
-['The Deep Roar of the Naga and Dragon','天龍甚深吼',null,'7_天龍甚深吼_5mb-compressed-2.mp3'],
-['Aspiration for the World','世界啊！',44,'世界啊(剪).mp3'],
-['Bringing Down The Rain of Blessings','加持雨降任顯豁然曲——上師祈請文',33,'加持雨降任顯豁然曲上師祈請文.m4a'],
-['Auspiciousness That Lights Up the Universe','吉祥光照全宇宙',47,'吉祥光照全宇宙.mp3'],
-['Generation Stage','生起次第',78,'10_生起次第.m4a'],
-['White Tara Supplication','白度母祈請文',22,'白度母祈請文.m4a'],
-['Three Kinds of Confidence','對勝義的三種確信',77,'23_對勝義的三種確信.mp3'],
-['Verses on the Samadhi of Illusion','如幻三摩地詩偈',81,'13_如幻三摩地詩偈.m4a'],
-['Prayer of Solemn Commitment','決心歌',68,'14決心歌.mp3'],
-['King Songtsen Gampo’s Song of Auspiciousness','法王松贊甘布勝住開光吉祥文',57,'15_法王松贊甘布勝住開光吉祥文.mp4'],
-['City of Dharmakaya','法身城',46,'16_法身城.m4a'],
-['Vajradhara Khenchen Tsültrim Gyamtso Rinpoche Guru Yoga','金剛持堪千竹清嘉措仁波切上師相應法',12,'金剛持堪千竹清嘉措仁波切 上師相應法.m4a'],
-['Melody Of Devotion’s Longing','殷切虔敬曲——大恩上師祈請文',36,'殷切虔敬曲 大恩上師祈請文.m4a'],
-['17th Karmapa Long Life Supplication','第十七世大寶法王鄔金欽列多傑長壽祈請文',31,'19_第十七世大寶法王鄔金欽列多傑長壽祈請文.mp4'],
-['Completion Stage','圓滿次第',null,'20_圓滿次第.m4a'],
-['Eighteen Kinds of Yogic Joy','瑜伽十八樂',51,'21_瑜伽十八樂(s)-compressed.mp3'],
-['The Way Things Are','萬物本貌',83,'22_萬物本貌.m4a'],
-['Devotion to the Guru / Guru Yoga','德謙讓卓上師相應法',11,'24_德謙讓卓上師相應法.m4a'],
-['The Vajra Dance of Bliss and Emptiness','樂空不二金剛舞',79,'25_樂空不二金剛舞.m4a'],
-['Seven-Line Prayer to Guru Rinpoche','蓮師七句祈請文',null,'26_蓮師七句祈請文（華老師 馬爾巴調）.m4a'],
-['Seven-Line Prayer followed by Guru Rinpoche Mantra','蓮師七句祈請文接續蓮師心咒',null,'27_蓮師七句祈請文接續蓮師心咒.m4a'],
-['Guru Rinpoche Mantra','蓮師心咒',null,'28_蓮師心咒.m4a'],
-['Light Offering','點燈祈願文',63,'29_點燈祈願文.m4a'],
-['Calling Out To The Guru’s Enlightened Mind','勸請至要誓願——堪千竹清嘉措仁波切迅速轉世祈請文',32,'30_勸請至要誓願 堪千竹清嘉措仁波切迅速轉世祈請文.mp3'],
-['Long Life Supplication for Dilyak Drupon Rinpoche','諦雅竹奔仁波切長久住世祈請文',40,'諦雅竹奔仁波切祈請文.aac']
-];
-// Keep PDF page order where page numbers are available; items without a page stay after their known-page neighbors by listed order.
-const q=document.getElementById('q'),list=document.getElementById('list'),filters=document.getElementById('filters'),count=document.getElementById('count');let f='全部';
-function render(){const term=q.value.trim().toLowerCase();let arr=songs.filter(s=>!term||(s[0]+' '+s[1]).toLowerCase().includes(term));if(f==='有音檔')arr=arr.filter(s=>s[3]);if(f==='待補')arr=arr.filter(s=>!s[3]);count.textContent=`共 ${arr.length} 首｜目前 ${songs.filter(s=>s[3]).length} 首有音檔`;list.innerHTML=arr.length?arr.map(s=>`<div class="song"><div class="en">${s[0]}</div><div class="cn">${s[1]}</div><div class="meta">${s[2]?'法本 p.'+s[2]:'法本頁碼未標示'}</div>${s[3]?`<div class="play">🎧 已有音檔</div><audio class="audio" controls preload="none" src="${A+encodeURIComponent(s[3]).replace(/%2F/g,'/')}"></audio>`:'<div class="play">○ 待補音檔</div>'}</div>`).join(''):'<div class="empty">找不到符合的歌曲</div>'}
-function setF(x){f=x;filters.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.f===x));render()}
-filters.innerHTML=['全部','有音檔','待補'].map(x=>`<button class="filter ${x==='全部'?'active':''}" data-f="${x}">${x}</button>`).join('');filters.onclick=e=>{if(e.target.dataset.f)setF(e.target.dataset.f)};q.oninput=render;render();
-</script></body></html>
+const audio={
+'大手印傳承祈請文':'4_大手印傳承祈請文(後段重複旋律).m4a','蓮師七句祈請文':'26_蓮師七句祈請文（華老師 馬爾巴調）.m4a','白度母祈請文':'白度母祈請文.m4a','德謙讓卓上師相應法':'24_德謙讓卓上師相應法.m4a','天龍甚深吼':'7_天龍甚深吼_5mb-compressed-2.mp3','法身城':'16_法身城.m4a','八無拒':'1_八無拒-compressed.mp3','吉祥光照全宇宙':'12_吉祥光照全宇宙_5mb.mp3','世界啊！':'世界啊(剪).mp3','加持雨降任顯豁然曲・上師祈請文':'9_加持雨降任顯豁然曲上師祈請文.m4a','天笛之哀呼・萬賢哲之頂嚴堪千竹清喜措仁波切祈請文':'6_天笛之哀呼 萬賢哲之頂嚴堪千竹清喜措仁波切祈請文.m4a','殷切虔敬曲・大恩上師祈請文':'18_殷切虔敬曲 大恩上師祈請文.m4a','勸請至要誓願・堪千竹清嘉措仁波切迅速轉世祈請文':'30_勸請至要誓願 堪千竹清嘉措仁波切迅速轉世祈請文.mp3','第十七世大寶法王鄔金欽列多傑長久住世祈請文':'19_第十七世大寶法王鄔金欽列多傑長壽祈請文.mp4','竹慶本樂仁波切長久住世祈請文 & 佛行事業昌盛祈請文':null,'阿拉桑噶仁波切長久住世祈請文':null,'諦雅竹奔仁波切長久住世祈請文':'諦雅竹奔仁波切祈請文.aac','密勒日巴迴向文（願君長壽離病苦……）':null,'龍樹菩薩迴向文':null,'那爛陀菩提祈願文／那爛陀祈願文':null,'一切顯相':null,'瑜伽十八樂':'21_瑜伽十八樂(s)-compressed.mp3','萬物本貌':'22_萬物本貌.m4a','對勝義的三種確信':'23_對勝義的三種確信.mp3','菩提心祈願文':null};
+const S={
+'大手印傳承祈請文':['Supplication to the Takpo Kagyu / Mahamudra Lineage',3],
+'蓮師七句祈請文':['Seven-Line Supplication to Padmakara',18],
+'白度母祈請文':['Supplication to White Tara (with melody)',6],
+'德謙讓卓上師相應法':['Guru Yoga by Dechen Rangdrol',11],
+'天龍甚深吼':["Sky Dragon’s Profound Roar",71],
+'法身城':['Appearances Like an Illusion',46],
+'八無拒':['Eight Cases of Basic Goodness Not to be Shunned',49],
+'吉祥光照全宇宙':['Auspiciousness That Lights Up the Universe',47],
+'世界啊！':['Aspiration for the World',44],
+'加持雨降任顯豁然曲・上師祈請文':['Bringing Down The Rain of Blessings: A Spontaneous Song Supplicating the Guru–His Holiness Karmapa XVII Orgyen Trinley Dorje',33],
+'天笛之哀呼・萬賢哲之頂嚴堪千竹清喜措仁波切祈請文':['The Deva’s Flute: Calling Out with Longing to Khenchen Tsültrim Gyamtso, the Crown Jewel Among Millions of Siddhas and Panditas–Alak Zenkar Rinpoche',34],
+'殷切虔敬曲・大恩上師祈請文':['Melody Of Devotion’s Longing: A Supplication to the Kind Guru–Dzogchen Ponlop Rinpoche',36],
+'勸請至要誓願・堪千竹清嘉措仁波切迅速轉世祈請文':['Calling Out To The Guru’s Enlightened Mind: An Aspiration for His Swift Return–His Holiness Karmapa XVII Orgyen Trinley Dorje',32],
+'第十七世大寶法王鄔金欽列多傑長久住世祈請文':['Long Life Supplication for HHK XVII',31],
+'竹慶本樂仁波切長久住世祈請文 & 佛行事業昌盛祈請文':['Long Life Supplication for Dzogchen Ponlop Rinpoche',38],
+'阿拉桑噶仁波切長久住世祈請文':['Long Life Supplication for Alak Zenkar Rinpoche',39],
+'諦雅竹奔仁波切長久住世祈請文':['Long Life Supplication for Dilyak Drupon Rinpoche',40],
+'密勒日巴迴向文（願君長壽離病苦……）':["Milarepa’s dedication: “May we live long…”",42],
+'龍樹菩薩迴向文':['Dedication by Nagarjuna',42],
+'那爛陀菩提祈願文／那爛陀祈願文':['Nalanda Aspiration',43],
+'一切顯相':['Self Appearing Illusion',70],
+'瑜伽十八樂':['Eighteen Kinds of Yogic Joy',51],
+'萬物本貌':['The Way Things Are',83],
+'對勝義的三種確信':['Three Kinds of Confidence in Genuine Reality',77],
+'菩提心祈願文':['Aspiration of Bodhicitta',41]
+};
+const days={
+'Day 1':{'日期':'10/28','s1':['菩提心祈願文','竹慶本樂仁波切長久住世祈請文 & 佛行事業昌盛祈請文','密勒日巴迴向文（願君長壽離病苦……）','龍樹菩薩迴向文','那爛陀菩提祈願文／那爛陀祈願文'],'s2':['法身城','八無拒'],'s3':[],'s4':['吉祥光照全宇宙','世界啊！'],'s5':[]},
+'Day 2':{'日期':'10/29','s1':['天龍甚深吼','一切顯相','八無拒','菩提心祈願文','加持雨降任顯豁然曲・上師祈請文','天笛之哀呼・萬賢哲之頂嚴堪千竹清喜措仁波切祈請文','殷切虔敬曲・大恩上師祈請文','勸請至要誓願・堪千竹清嘉措仁波切迅速轉世祈請文','第十七世大寶法王鄔金欽列多傑長久住世祈請文','竹慶本樂仁波切長久住世祈請文 & 佛行事業昌盛祈請文','阿拉桑噶仁波切長久住世祈請文','諦雅竹奔仁波切長久住世祈請文','密勒日巴迴向文（願君長壽離病苦……）','龍樹菩薩迴向文','那爛陀菩提祈願文／那爛陀祈願文'],'s2':['法身城','八無拒','一切顯相','第十七世大寶法王鄔金欽列多傑長久住世祈請文','竹慶本樂仁波切長久住世祈請文 & 佛行事業昌盛祈請文','阿拉桑噶仁波切長久住世祈請文','諦雅竹奔仁波切長久住世祈請文','密勒日巴迴向文（願君長壽離病苦……）','龍樹菩薩迴向文','那爛陀菩提祈願文／那爛陀祈願文'],'s3':[],'s4':['天龍甚深吼','一切顯相','瑜伽十八樂','萬物本貌','對勝義的三種確信','菩提心祈願文','加持雨降任顯豁然曲・上師祈請文','天笛之哀呼・萬賢哲之頂嚴堪千竹清喜措仁波切祈請文','殷切虔敬曲・大恩上師祈請文','勸請至要誓願・堪千竹清嘉措仁波切迅速轉世祈請文','第十七世大寶法王鄔金欽列多傑長久住世祈請文','竹慶本樂仁波切長久住世祈請文 & 佛行事業昌盛祈請文','阿拉桑噶仁波切長久住世祈請文','諦雅竹奔仁波切長久住世祈請文','密勒日巴迴向文（願君長壽離病苦……）','龍樹菩薩迴向文','那爛陀菩提祈願文／那爛陀祈願文','世界啊！'],'s5':[]},
+'Day 3':{'日期':'10/30','s1':['天龍甚深吼','一切顯相','勸請至要誓願・堪千竹清嘉措仁波切迅速轉世祈請文','竹慶本樂仁波切長久住世祈請文 & 佛行事業昌盛祈請文','諦雅竹奔仁波切長久住世祈請文','密勒日巴迴向文（願君長壽離病苦……）','龍樹菩薩迴向文','那爛陀菩提祈願文／那爛陀祈願文'],'s2':['吉祥光照全宇宙','世界啊！'],'s3':[],'s4':['菩提心祈願文','加持雨降任顯豁然曲・上師祈請文','天笛之哀呼・萬賢哲之頂嚴堪千竹清喜措仁波切祈請文','殷切虔敬曲・大恩上師祈請文','勸請至要誓願・堪千竹清嘉措仁波切迅速轉世祈請文','第十七世大寶法王鄔金欽列多傑長久住世祈請文','竹慶本樂仁波切長久住世祈請文 & 佛行事業昌盛祈請文','阿拉桑噶仁波切長久住世祈請文','諦雅竹奔仁波切長久住世祈請文','密勒日巴迴向文（願君長壽離病苦……）','龍樹菩薩迴向文','那爛陀菩提祈願文／那爛陀祈願文','世界啊！'],'s5':[]}
+};
+let day='Day 1',session='s1';
+const q=document.getElementById('q'),daysEl=document.getElementById('days'),sessionsEl=document.getElementById('sessions'),list=document.getElementById('list'),mode=document.getElementById('mode');
+function enc(name){return encodeURI(name).replace(/#/g,'%23').replace(/\?/g,'%3F')}
+function songCard(cn){const x=S[cn];if(!x)return '';const en=x[0],p=x[1],file=audio[cn];return `<div class="song"><div class="en">${en}</div><div class="cn">${cn}</div><div class="meta">法本 p.${p}</div>${file?`<span class="badge audioBadge">🎧 有音檔</span><audio controls preload="none" src="${A+enc(file)}"></audio>`:'<span class="badge">○ 尚未加入音檔</span>'}</div>`}
+function render(){
+const term=q.value.trim().toLowerCase();
+const search=!!term;
+daysEl.innerHTML=Object.keys(days).map(d=>`<button class="day ${day===d&&!search?'active':''}" onclick="chooseDay('${d}')">${d}<br><small>${days[d].日期}</small></button>`).join('');
+const ss=['s1','s2','s3','s4','s5'];sessionsEl.innerHTML=ss.map(s=>`<button class="session ${session===s&&!search?'active':''}" onclick="chooseSession('${s}')">Session ${s.slice(1)}</button>`).join('');
+if(search){let found=[];Object.keys(days).forEach(d=>Object.keys(days[d]).filter(k=>k.startsWith('s')).forEach(s=>days[d][s].forEach(c=>{if((S[c]?.[0]+' '+c).toLowerCase().includes(term))found.push([d,s,c]);})));let seen=new Set();found=found.filter(x=>{let k=x[2];if(seen.has(k))return false;seen.add(k);return true});mode.textContent=`搜尋結果：${found.length} 首（點選上方 Day / Session 可回到場次）`;list.innerHTML=found.length?found.map(x=>`<div class="sectionTitle">${x[0]}｜Session ${x[1].slice(1)}</div>${songCard(x[2])}`).join(''):'<div class="empty">找不到符合的歌曲</div>';return}
+const arr=days[day][session];const labels={s1:'Session 1',s2:'Session 2',s3:'Session 3｜個人修持（無固定維那歌曲）',s4:'Session 4',s5:'Session 5｜道歌練習（無指定維那歌曲）'};mode.textContent=day+'｜'+labels[session];if(!arr.length){list.innerHTML='<div class="empty">這一場沒有列出固定維那歌曲。<br>Session 3 為個人修持；Session 5 為全體道歌／迴向歌練習。</div>';return}list.innerHTML=arr.map(songCard).join('')}
+function chooseDay(d){day=d;session='s1';render()}function chooseSession(s){session=s;render()}q.oninput=render;render();
+</script></div></body></html>
