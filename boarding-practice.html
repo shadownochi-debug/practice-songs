@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="登機練歌">
+<meta name="theme-color" content="#f5f0e7">
+<title>尼泊爾登機練歌｜4 首</title>
+<style>
+:root{--bg:#f5f0e7;--card:#fffdf8;--ink:#2f2b27;--muted:#756e66;--line:#ded5c8;--accent:#7b5b3a;--ok:#39734a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.65}
+main{max-width:760px;margin:auto;padding:24px 16px 48px}.hero{padding:10px 4px 18px}.hero h1{font-size:27px;margin:0 0 5px}.hero p{margin:0;color:var(--muted)}
+.status{background:#efe6d8;border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin:12px 0 18px}.status strong{display:block;margin-bottom:4px}.status small{color:var(--muted)}
+button{border:0;border-radius:12px;padding:11px 14px;background:var(--accent);color:white;font-size:15px;margin-top:10px}button:disabled{opacity:.55}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:14px 0;overflow:hidden}.head{padding:17px 17px 12px}.en{font-size:21px;font-weight:700}.zh{font-size:18px;font-weight:600;margin-top:2px}.meta{font-size:14px;color:var(--muted);margin-top:5px}.lyrics{padding:0 17px 17px;white-space:pre-wrap;font-size:17px;border-top:1px solid var(--line);padding-top:14px}.tag{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 8px;margin-left:5px;color:var(--ok);background:#f1f7f1}.audio{width:100%;margin-top:10px}.note{font-size:13px;color:var(--muted);padding:0 17px 17px}.footer{font-size:13px;color:var(--muted);margin-top:24px}
+</style>
+</head>
+<body>
+<main>
+<section class="hero"><h1>🇳🇵 尼泊爾登機練歌</h1><p>只放這次最需要熟悉的 4 首｜歌詞＋音檔</p></section>
+<div class="status" id="status"><strong>正在準備離線音檔…</strong><small>第一次請在有網路時開啟，完成後可開飛航模式測試。</small><br><button id="prepare">立即準備離線版</button></div>
+<div id="songs"></div>
+<div class="footer">離線使用：在 Safari 開啟本頁後，按「準備離線版」；完成後可加入主畫面。出發前請務必開啟飛航模式重新測一次。</div>
+</main>
+<script>
+const songs=[
+{en:'The Deva’s Flute',zh:'天笛之哀呼',page:'34',file:'天笛之哀呼 萬賢哲之頂嚴堪千竹清喜措仁波切祈請文.m4a',lyrics:`南無咕嚕班扎達惹雅（敬禮上師金剛持）
+智慧多聞深解經咒義　圓證深教明睿廣通達
+事業浩瀚教眾之榮光　具格賢善知識護念我
+
+心意無漏交輝如雲鬘　融於無遮法身之天際
+色身示現日落而西沉　我心難忍哀呼上師尊
+
+戒律圓淨藏紅法袍嚴　無逸禪定全大勇觀行¹
+寶有全知燦爛知識海　痛切祈請無比之上師
+
+講辯著作宣經續密意　內住等持證悟登王座
+托舉解行大日具力者　教證佛法棟樑尊恆念
+
+氣脈明點中脈和合中　三顯²次第消融四空舞
+幻身虹彩明光大樂身　呼喚雙運自解尊勝師
+
+無緣空性離戲之法界　真如不壞俱生大本智
+無別無漏密意虛空中　祈賜加持甘露潤我心`},
+{en:'Three Kinds of Confidence in Genuine Reality',zh:'對勝義的三種確信',page:'77',file:'23_對勝義的三種確信.mp3',lyrics:`敬禮譯師馬爾巴　　我於他鄉修行時
+於無生法得定解　　今生來生二執淨
+六道顯相成虛妄　　生死二者增益斷
+
+於平等性得定解　　苦樂二執得清淨
+感受體驗成虛妄　　取捨二者增益斷
+
+於無分別得定解　　輪涅二執皆清淨
+道地修習成虛妄　　希懼二者增益斷`},
+{en:'Bringing Down The Rain of Blessings',zh:'加持雨降任顯豁然曲——上師祈請文',page:'33',file:'加持雨降任顯豁然曲上師祈請文.m4a',lyrics:`南無咕嚕
+
+客塵清淨自生之本智　離於破立取捨光殼中
+身智本然法性之上師　自識本貌性中作祈請
+
+大空命之明點耀攝舞　和合相好韶華明朗現
+嘿嚕嘎尊報身之上師　心氣無二性中作祈請
+
+三匯處之熾燃拙火舌　無餘焚毀蘊執為塵埃
+燃滴融於中脈上師尊　溶樂俱生性中作祈請
+
+顯聲覺於上師舞中現　悲智雄力加持住自心
+四灌密意心意相融已　祈賜二利任運之加持`},
+{en:'Melody Of Devotion’s Longing',zh:'殷切虔敬曲——大恩上師祈請文',page:'36',file:'殷切虔敬曲 大恩上師祈請文.m4a',lyrics:`上師知　上師知　上師知
+
+當下心性有如虛空時　我父大恩上師之法身
+真實佛陀德謙讓卓知　祈賜心意合一之悉地
+
+當下顯相無非明光時　我父大恩上師報身圓
+真實佛陀德謙讓卓知　祈賜心意雙運之悉地
+
+當下心顯皆為遊戲時　我父大恩上師之化身
+真實佛陀德謙讓卓知　祈賜心意不離之悉地
+
+勝義上師尊之大悲藏　常住我虔敬心永不離
+我此自心一如上師般　祈賜加持當下即了悟
+
+從來無聚無散虔敬中　自心若能無疑作祈請
+大愛悲心不倦恆看護　賜與師心無別之悉地
+
+首先殷切祈請外上師　其次與內上師心合一
+最終一味無別本解脫　利樂無盡有情大願成`}
+];
+const root='./';
+function esc(s){return s.replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\\':'&#92;'}[m]))}
+const box=document.getElementById('songs');
+songs.forEach((s,i)=>{const d=document.createElement('article');d.className='card';d.innerHTML=`<div class="head"><div class="en">${esc(s.en)}</div><div class="zh">${esc(s.zh)}</div><div class="meta">法本 p.${s.page}<span class="tag" id="tag${i}">音檔準備中</span></div><audio class="audio" controls preload="metadata" src="${root}${encodeURIComponent(s.file)}"></audio></div><div class="lyrics">${esc(s.lyrics)}</div><div class="note">歌詞依你提供的中心法本整理；沒有另外改寫內容。</div>`;box.appendChild(d)});
+const cacheName='nepal-boarding-v1';
+const urls=['./boarding-practice.html',...songs.map(s=>'./'+encodeURIComponent(s.file))];
+async function prepare(){const status=document.getElementById('status'),btn=document.getElementById('prepare');btn.disabled=true;status.querySelector('strong').textContent='正在下載 4 首音檔到離線快取…';try{const c=await caches.open(cacheName);for(let i=1;i<urls.length;i++){await c.add(urls[i]);document.getElementById('tag'+(i-1)).textContent='✓ 已準備離線';}await c.add('./boarding-practice.html');status.querySelector('strong').textContent='✓ 離線版準備完成';status.querySelector('small').textContent='現在可以開飛航模式重新開啟本頁測試。';}catch(e){status.querySelector('strong').textContent='⚠️ 尚未完成離線準備';status.querySelector('small').textContent='請保持網路，再按一次「立即準備離線版」。';}finally{btn.disabled=false}}
+document.getElementById('prepare').onclick=prepare;
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw-boarding.js?v=1').catch(()=>{});
+</script>
+</body></html>
