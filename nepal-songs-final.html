@@ -1,0 +1,40 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><title>🇳🇵 尼泊爾共修歌曲</title><style>body{margin:0;background:#f5f0e7;color:#332c25;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Serif TC",sans-serif}.app{max-width:700px;margin:auto;padding:22px 14px 40px}h1{text-align:center;font-size:24px;margin:0 0 4px}.sub{text-align:center;color:#81766a;font-size:12px;line-height:1.7;margin-bottom:16px}.search{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #d9cdbd;border-radius:12px;background:#fffdf8;font-size:16px;margin-bottom:10px}.filters{display:flex;gap:7px;overflow:auto;margin-bottom:12px}.filter{white-space:nowrap;border:1px solid #d9cdbd;border-radius:20px;background:#fffdf8;padding:8px 12px;color:#6e5842}.filter.active{background:#6e5842;color:white}.song{display:block;width:100%;box-sizing:border-box;text-align:left;border:1px solid #ddd2c3;border-radius:13px;background:#fffdf8;padding:14px;margin:0 0 9px;color:#332c25}.song .en{font-size:15px;font-weight:600;line-height:1.45}.song .cn{font-size:14px;color:#756b61;margin-top:3px}.meta{font-size:11px;color:#81766a;margin-top:7px}.audio{margin-top:9px;width:100%;height:38px}.empty{text-align:center;color:#81766a;padding:30px}.play{font-size:12px;color:#496b52;margin-top:7px}</style></head><body><div class="app"><h1>🇳🇵 尼泊爾共修歌曲</h1><div class="sub">2026/10/28–10/30｜諦雅寺<br>依尼泊爾共修資料整理｜英文 → 中文｜法本頁碼</div><input id="q" class="search" placeholder="搜尋中文或英文歌名"><div id="filters" class="filters"></div><div id="count" class="sub"></div><div id="list"></div></div><script>
+const A='./';
+const songs=[
+['Mahamudra Lineage Supplication','大手印傳承祈請文',3,'4_大手印傳承祈請文(後段重複旋律).m4a'],
+['The Song of Mahamudra','大手印之歌',76,'3_大手印之歌.m4a'],
+['The Essential Points of Mahamudra, Dzogchen, and the Middle Way','大手印、大圓滿、大中觀要義',53,'2_大手印、大圓滿、大中觀要義-compressed.mp3'],
+['Five Poisons Self-Liberated','五毒自解脫',54,'5_五毒自解脫.mp3'],
+['The Deva’s Flute','天笛之哀呼——十萬賢哲之頂嚴堪千竹清嘉措仁波切祈請文',34,'天笛之哀呼 萬賢哲之頂嚴堪千竹清喜措仁波切祈請文.m4a'],
+['The Deep Roar of the Naga and Dragon','天龍甚深吼',null,'7_天龍甚深吼_5mb-compressed-2.mp3'],
+['Aspiration for the World','世界啊！',44,'世界啊(剪).mp3'],
+['Bringing Down The Rain of Blessings','加持雨降任顯豁然曲——上師祈請文',33,'加持雨降任顯豁然曲上師祈請文.m4a'],
+['Auspiciousness That Lights Up the Universe','吉祥光照全宇宙',47,'吉祥光照全宇宙.mp3'],
+['Generation Stage','生起次第',78,'10_生起次第.m4a'],
+['White Tara Supplication','白度母祈請文',22,'白度母祈請文.m4a'],
+['Three Kinds of Confidence','對勝義的三種確信',77,'23_對勝義的三種確信.mp3'],
+['Verses on the Samadhi of Illusion','如幻三摩地詩偈',81,'13_如幻三摩地詩偈.m4a'],
+['Prayer of Solemn Commitment','決心歌',68,'14決心歌.mp3'],
+['King Songtsen Gampo’s Song of Auspiciousness','法王松贊甘布勝住開光吉祥文',57,'15_法王松贊甘布勝住開光吉祥文.mp4'],
+['City of Dharmakaya','法身城',46,'16_法身城.m4a'],
+['Vajradhara Khenchen Tsültrim Gyamtso Rinpoche Guru Yoga','金剛持堪千竹清嘉措仁波切上師相應法',12,'金剛持堪千竹清嘉措仁波切 上師相應法.m4a'],
+['Melody Of Devotion’s Longing','殷切虔敬曲——大恩上師祈請文',36,'殷切虔敬曲 大恩上師祈請文.m4a'],
+['17th Karmapa Long Life Supplication','第十七世大寶法王鄔金欽列多傑長壽祈請文',31,'19_第十七世大寶法王鄔金欽列多傑長壽祈請文.mp4'],
+['Completion Stage','圓滿次第',null,'20_圓滿次第.m4a'],
+['Eighteen Kinds of Yogic Joy','瑜伽十八樂',51,'21_瑜伽十八樂(s)-compressed.mp3'],
+['The Way Things Are','萬物本貌',83,'22_萬物本貌.m4a'],
+['Devotion to the Guru / Guru Yoga','德謙讓卓上師相應法',11,'24_德謙讓卓上師相應法.m4a'],
+['The Vajra Dance of Bliss and Emptiness','樂空不二金剛舞',79,'25_樂空不二金剛舞.m4a'],
+['Seven-Line Prayer to Guru Rinpoche','蓮師七句祈請文',null,'26_蓮師七句祈請文（華老師 馬爾巴調）.m4a'],
+['Seven-Line Prayer followed by Guru Rinpoche Mantra','蓮師七句祈請文接續蓮師心咒',null,'27_蓮師七句祈請文接續蓮師心咒.m4a'],
+['Guru Rinpoche Mantra','蓮師心咒',null,'28_蓮師心咒.m4a'],
+['Light Offering','點燈祈願文',63,'29_點燈祈願文.m4a'],
+['Calling Out To The Guru’s Enlightened Mind','勸請至要誓願——堪千竹清嘉措仁波切迅速轉世祈請文',32,'30_勸請至要誓願 堪千竹清嘉措仁波切迅速轉世祈請文.mp3'],
+['Long Life Supplication for Dilyak Drupon Rinpoche','諦雅竹奔仁波切長久住世祈請文',40,'諦雅竹奔仁波切祈請文.aac']
+];
+// Keep PDF page order where page numbers are available; items without a page stay after their known-page neighbors by listed order.
+const q=document.getElementById('q'),list=document.getElementById('list'),filters=document.getElementById('filters'),count=document.getElementById('count');let f='全部';
+function render(){const term=q.value.trim().toLowerCase();let arr=songs.filter(s=>!term||(s[0]+' '+s[1]).toLowerCase().includes(term));if(f==='有音檔')arr=arr.filter(s=>s[3]);if(f==='待補')arr=arr.filter(s=>!s[3]);count.textContent=`共 ${arr.length} 首｜目前 ${songs.filter(s=>s[3]).length} 首有音檔`;list.innerHTML=arr.length?arr.map(s=>`<div class="song"><div class="en">${s[0]}</div><div class="cn">${s[1]}</div><div class="meta">${s[2]?'法本 p.'+s[2]:'法本頁碼未標示'}</div>${s[3]?`<div class="play">🎧 已有音檔</div><audio class="audio" controls preload="none" src="${A+encodeURIComponent(s[3]).replace(/%2F/g,'/')}"></audio>`:'<div class="play">○ 待補音檔</div>'}</div>`).join(''):'<div class="empty">找不到符合的歌曲</div>'}
+function setF(x){f=x;filters.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.f===x));render()}
+filters.innerHTML=['全部','有音檔','待補'].map(x=>`<button class="filter ${x==='全部'?'active':''}" data-f="${x}">${x}</button>`).join('');filters.onclick=e=>{if(e.target.dataset.f)setF(e.target.dataset.f)};q.oninput=render;render();
+</script></body></html>
